@@ -1,0 +1,9 @@
+.channelTileLabel {{
+    font-size: 20pt;
+    color: #222;
+    qproperty-alignment: AlignCenter;
+}}
+
+QLabel {{
+    color: #222;
+}}

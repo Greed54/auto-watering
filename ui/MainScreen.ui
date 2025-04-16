@@ -1,0 +1,1097 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+      </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item>
+     <layout class="QVBoxLayout" name="mainLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <layout class="QHBoxLayout" name="topBar">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="topLeftLayout">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="date_time_label">
+            <property name="minimumSize">
+             <size>
+              <width>250</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font-size: 30pt;</string>
+            </property>
+            <property name="text">
+             <string>12:30 | 12.04.2025</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="wifi_status_icon">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="IconsResource.qrc">:/icons/icons8-wifi-off-48.png</pixmap>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="topRightLayout">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="toggle_watering_btn">
+            <property name="minimumSize">
+             <size>
+              <width>170</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+                            background-color: #1e88e5;
+                            color: white;
+                            border: none;
+                            border-radius: 20px;
+                            font-size: 30pt;
+                            }
+                            QPushButton:hover {
+                            background-color: #1976d2;
+                            }
+                            QPushButton:pressed {
+                            background-color: #0d47a1;
+                            }
+                          </string>
+            </property>
+            <property name="text">
+             <string>Start</string>
+            </property>
+            <property name="icon">
+             <iconset resource="IconsResource.qrc">
+              <normaloff>:/icons/icons8-start-48.png</normaloff>:/icons/icons8-start-48.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>48</width>
+              <height>48</height>
+             </size>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="manual_mode_btn">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+                            background-color: #f0f0f0;
+                            color: #333333;
+                            border: none;
+                            border-radius: 20px;
+                            padding: 8px 24px;
+                            }
+                            QPushButton:hover {
+                            background-color: #e0e0e0;
+                            }
+                            QPushButton:pressed {
+                            background-color: #cccccc;
+                            }
+                          </string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="IconsResource.qrc">
+              <normaloff>:/icons/icons8-manual-48.png</normaloff>:/icons/icons8-manual-48.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>48</width>
+              <height>48</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="schedule_btn">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+                            background-color: #f0f0f0;
+                            color: #333333;
+                            border: none;
+                            border-radius: 20px;
+                            padding: 8px 24px;
+                            }
+                            QPushButton:hover {
+                            background-color: #e0e0e0;
+                            }
+                            QPushButton:pressed {
+                            background-color: #cccccc;
+                            }
+                          </string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="IconsResource.qrc">
+              <normaloff>:/icons/icons8-time-48.png</normaloff>:/icons/icons8-time-48.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>48</width>
+              <height>48</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="settings_btn">
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+                            background-color: #f0f0f0;
+                            color: #333333;
+                            border: none;
+                            border-radius: 20px;
+                            padding: 8px 24px;
+                            }
+                            QPushButton:hover {
+                            background-color: #e0e0e0;
+                            }
+                            QPushButton:pressed {
+                            background-color: #cccccc;
+                            }
+                          </string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="IconsResource.qrc">
+              <normaloff>:/icons/icons8-settings-48.png</normaloff>:/icons/icons8-settings-48.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>49</width>
+              <height>48</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QGridLayout" name="channelsGrid">
+        <property name="topMargin">
+         <number>10</number>
+        </property>
+        <property name="spacing">
+         <number>20</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QWidget" name="channel_tile_1" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>180</height>
+           </size>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_1">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="name_label_1">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Channel 1</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="group_layout_1">
+             <item>
+              <spacer name="spacerLeftGroup_1">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_title_1">
+               <property name="text">
+                <string>Group:</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_number_1">
+               <property name="text">
+                <string>1</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="spacerRightGroup_1">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="state_label_1">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>0 min</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QWidget" name="channel_tile_2" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>180</height>
+           </size>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="name_label_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Channel 2</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="group_layout_2">
+             <item>
+              <spacer name="spacerLeftGroup_2">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_title_2">
+               <property name="text">
+                <string>Group:</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_number_2">
+               <property name="text">
+                <string>2</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="spacerRightGroup_2">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="state_label_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>0 min</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QWidget" name="channel_tile_3" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>180</height>
+           </size>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="name_label_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Channel 3</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="group_layout_3">
+             <item>
+              <spacer name="spacerLeftGroup_3">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_title_3">
+               <property name="text">
+                <string>Group:</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_number_3">
+               <property name="text">
+                <string>3</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="spacerRightGroup_3">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="state_label_3">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>0 min</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QWidget" name="channel_tile_4" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>180</height>
+           </size>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="name_label_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Channel 4</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="group_layout_4">
+             <item>
+              <spacer name="spacerLeftGroup_4">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_title_4">
+               <property name="text">
+                <string>Group:</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_number_4">
+               <property name="text">
+                <string>4</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="spacerRightGroup_4">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="state_label_4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>0 min</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QWidget" name="channel_tile_5" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>180</height>
+           </size>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="name_label_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Channel 5</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="group_layout_5">
+             <item>
+              <spacer name="spacerLeftGroup_5">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_title_5">
+               <property name="text">
+                <string>Group:</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_number_5">
+               <property name="text">
+                <string>5</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="spacerRightGroup_5">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="state_label_5">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>0 min</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QWidget" name="channel_tile_6" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>170</height>
+           </size>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="name_label_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Channel 6</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="group_layout_6">
+             <item>
+              <spacer name="spacerLeftGroup_6">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_title_6">
+               <property name="text">
+                <string>Group:</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_number_6">
+               <property name="text">
+                <string>6</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="spacerRightGroup_6">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="state_label_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>0 min</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QWidget" name="channel_tile_7" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>180</height>
+           </size>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="name_label_7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Channel 7</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="group_layout_7">
+             <item>
+              <spacer name="spacerLeftGroup_7">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_title_7">
+               <property name="text">
+                <string>Group:</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="group_label_number_7">
+               <property name="text">
+                <string>7</string>
+               </property>
+               <property name="class" stdset="0">
+                <string>channelTileLabel</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="spacerRightGroup_7">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>10</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="state_label_7">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>0 min</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QWidget" name="pump_channel_tile" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>170</width>
+            <height>170</height>
+           </size>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="pump_name_label">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Pump</string>
+             </property>
+             <property name="class" stdset="0">
+              <string>channelTileLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="IconsResource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
