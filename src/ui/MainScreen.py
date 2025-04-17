@@ -73,7 +73,7 @@ class Ui_MainWindow(object):
         self.topRightLayout.setContentsMargins(10, 0, -1, 10)
         self.toggle_watering_btn = QPushButton(self.centralwidget)
         self.toggle_watering_btn.setObjectName(u"toggle_watering_btn")
-        self.toggle_watering_btn.setMinimumSize(QSize(170, 50))
+        self.toggle_watering_btn.setMinimumSize(QSize(200, 50))
         icon = QIcon()
         icon.addFile(u":/icons/play_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.toggle_watering_btn.setIcon(icon)

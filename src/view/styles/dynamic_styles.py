@@ -47,3 +47,33 @@ DISABLED_PUMP_STYLE = '''
     background-color: #DFFF00;
 }         
 '''
+
+# language=css
+AUTO_WATERING_ENABLED_STYLE = '''
+.startStopButton {
+    background-color: #E83F25;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 30pt;
+}
+
+.startStopButton:pressed {
+    background-color: #A62C2C;
+}
+'''
+
+# language=css
+AUTO_WATERING_DISABLED_STYLE = '''
+.startStopButton {
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 30pt;
+}
+
+.startStopButton:pressed {
+    background-color: #0d47a1;
+}
+'''

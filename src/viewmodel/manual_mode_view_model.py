@@ -1,15 +1,14 @@
 from datetime import datetime
 
-from PySide6.QtCore import QObject, QTimer, Signal, Slot
+from PySide6.QtCore import QObject, Signal, Slot, QTimer
 
 from model.data_models import ApplicationState
 
 
-class MainViewModel(QObject):
+class ManualModeViewModel(QObject):
     time_updated = Signal(str)
     state_updated = Signal(object)
-    channel_clicked = Signal(int)
-    manual_mode_clicked = Signal()
+    auto_mode_clicked = Signal()
 
     def __init__(self, state: ApplicationState, parent=None):
         super().__init__(parent)
@@ -25,20 +24,21 @@ class MainViewModel(QObject):
         current_time = datetime.now().strftime("%H:%M | %d.%m.%Y")
         self.time_updated.emit(current_time)
 
-    @Slot(int)
+    @Slot()
+    def on_auto_mode_clicked(self):
+        self.state.pump.is_enabled = False
+        for channel in self.state.channels.values():
+            channel.is_enabled = False
+        self.auto_mode_clicked.emit()
+
+    @Slot()
     def on_channel_tale_click(self, channel_id: int):
         channel = self.state.channels[channel_id]
         if channel:
-            self.state.selected_channel_id = channel_id
+            channel.is_enabled = not channel.is_enabled
             self.state_updated.emit(self.state)
-            self.channel_clicked.emit(channel_id)
 
     @Slot()
-    def toggle_auto_watering(self):
-        # todo: add validation
-        self.state.is_auto_watering_enabled = not self.state.is_auto_watering_enabled
+    def on_pump_tale_click(self):
+        self.state.pump.is_enabled = not self.state.pump.is_enabled
         self.state_updated.emit(self.state)
-
-    @Slot()
-    def on_manual_mode_clicked(self):
-        self.manual_mode_clicked.emit()

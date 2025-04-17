@@ -1,12 +1,13 @@
 from typing import cast
 
 from PySide6 import QtCore
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QWidget, QLabel, QMainWindow
 
 from model.data_models import ApplicationState
 from ui.MainScreen import Ui_MainWindow
-from view.dynamic_styles import ENABLED_CHANNEL_STYLE, DISABLED_CHANNEL_STYLE, INACTIVE_CHANNEL_STYLE, ENABLED_PUMP_STYLE, \
-    DISABLED_PUMP_STYLE
+from view.styles.dynamic_styles import ENABLED_CHANNEL_STYLE, DISABLED_CHANNEL_STYLE, INACTIVE_CHANNEL_STYLE, ENABLED_PUMP_STYLE, \
+    DISABLED_PUMP_STYLE, AUTO_WATERING_ENABLED_STYLE, AUTO_WATERING_DISABLED_STYLE
 from viewmodel.main_view_model import MainViewModel
 
 
@@ -19,6 +20,9 @@ class MainWindow(QMainWindow):
 
         self.view_model.time_updated.connect(self.ui.date_time_label.setText)
         self.view_model.state_updated.connect(self.on_state_updated)
+
+        self.ui.toggle_watering_btn.clicked.connect(self.view_model.toggle_auto_watering)
+        self.ui.manual_mode_btn.clicked.connect(self.view_model.on_manual_mode_clicked)
 
         self.channel_tiles = {
             self.ui.channel_tile_1: 1,
@@ -33,16 +37,28 @@ class MainWindow(QMainWindow):
             channel_tile.installEventFilter(self)
 
     def showEvent(self, event):
+        self.view_model.update_time()
         self.on_state_updated(self.view_model.state)
         super().showEvent(event)
 
     def on_state_updated(self, state: ApplicationState):
 
+        if state.is_auto_watering_enabled:
+            self.ui.toggle_watering_btn.setStyleSheet(AUTO_WATERING_ENABLED_STYLE)
+            self.ui.toggle_watering_btn.setIcon(QIcon(":/icons/pause_icon.svg"))
+            self.ui.toggle_watering_btn.setText("STOP")
+        else:
+            self.ui.toggle_watering_btn.setStyleSheet(AUTO_WATERING_DISABLED_STYLE)
+            self.ui.toggle_watering_btn.setIcon(QIcon(":/icons/play_icon.svg"))
+            self.ui.toggle_watering_btn.setText("START")
+
+        # update pump ui
         if state.pump.is_enabled:
             self.ui.pump_channel_tile.setStyleSheet(ENABLED_PUMP_STYLE)
         else:
             self.ui.pump_channel_tile.setStyleSheet(DISABLED_PUMP_STYLE)
 
+        # update channel tiles ui
         for channel in state.channels.values():
             tile_name = f"channel_tile_{channel.id}"
             name_label_name = f"name_label_{channel.id}"
@@ -77,6 +93,6 @@ class MainWindow(QMainWindow):
 
     def eventFilter(self, source, event):
         if source in self.channel_tiles.keys() and event.type() == QtCore.QEvent.Type.MouseButtonPress:
-            self.view_model.toggle_channel(self.channel_tiles[source])
+            self.view_model.on_channel_tale_click(self.channel_tiles[source])
             return True
         return super().eventFilter(source, event)

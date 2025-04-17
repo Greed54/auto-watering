@@ -31,3 +31,8 @@ QLabel {{
 .topBarButton:pressed {{
     background-color: #cccccc;
 }}
+
+.manualModeLabel {{
+    font-size: 36pt;
+    color: #A62C2C;
+}}

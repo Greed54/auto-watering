@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>ManualWindow</class>
+ <widget class="QMainWindow" name="ManualWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -29,7 +29,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ManualWindow</string>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -99,46 +99,33 @@
           <property name="spacing">
            <number>10</number>
           </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
           <item>
-           <widget class="QPushButton" name="toggle_watering_btn">
+           <widget class="QLabel" name="label">
             <property name="minimumSize">
              <size>
               <width>200</width>
               <height>50</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>36</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
             <property name="text">
-             <string>Start</string>
+             <string>MANUAL</string>
             </property>
-            <property name="icon">
-             <iconset resource="IconsResource.qrc">
-              <normaloff>:/icons/play_icon.svg</normaloff>:/icons/play_icon.svg</iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>48</width>
-              <height>48</height>
-             </size>
-            </property>
-            <property name="autoDefault">
-             <bool>false</bool>
-            </property>
-            <property name="default">
-             <bool>false</bool>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
+            <property name="alignment">
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
             <property name="class" stdset="0">
-             <string>startStopButton</string>
+             <string>manualModeLabel</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="manual_mode_btn">
+           <widget class="QPushButton" name="auto_mode_btn">
             <property name="minimumSize">
              <size>
               <width>50</width>
@@ -150,7 +137,7 @@
             </property>
             <property name="icon">
              <iconset resource="IconsResource.qrc">
-              <normaloff>:/icons/icons8-manual-48.png</normaloff>:/icons/icons8-manual-48.png</iconset>
+              <normaloff>:/icons/icons8-auto-48.png</normaloff>:/icons/icons8-auto-48.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -267,72 +254,6 @@
              </property>
             </widget>
            </item>
-           <item>
-            <layout class="QHBoxLayout" name="group_layout_1">
-             <item>
-              <spacer name="spacerLeftGroup_1">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_title_1">
-               <property name="text">
-                <string>Group:</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_number_1">
-               <property name="text">
-                <string>1</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="spacerRightGroup_1">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QLabel" name="state_label_1">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>0 min</string>
-             </property>
-             <property name="class" stdset="0">
-              <string>channelTileLabel</string>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
         </item>
@@ -370,72 +291,6 @@
              </property>
              <property name="text">
               <string>Channel 2</string>
-             </property>
-             <property name="class" stdset="0">
-              <string>channelTileLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="group_layout_2">
-             <item>
-              <spacer name="spacerLeftGroup_2">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_title_2">
-               <property name="text">
-                <string>Group:</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_number_2">
-               <property name="text">
-                <string>2</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="spacerRightGroup_2">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QLabel" name="state_label_2">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>0 min</string>
              </property>
              <property name="class" stdset="0">
               <string>channelTileLabel</string>
@@ -485,72 +340,6 @@
              </property>
             </widget>
            </item>
-           <item>
-            <layout class="QHBoxLayout" name="group_layout_3">
-             <item>
-              <spacer name="spacerLeftGroup_3">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_title_3">
-               <property name="text">
-                <string>Group:</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_number_3">
-               <property name="text">
-                <string>3</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="spacerRightGroup_3">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QLabel" name="state_label_3">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>0 min</string>
-             </property>
-             <property name="class" stdset="0">
-              <string>channelTileLabel</string>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
         </item>
@@ -588,72 +377,6 @@
              </property>
              <property name="text">
               <string>Channel 4</string>
-             </property>
-             <property name="class" stdset="0">
-              <string>channelTileLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="group_layout_4">
-             <item>
-              <spacer name="spacerLeftGroup_4">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_title_4">
-               <property name="text">
-                <string>Group:</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_number_4">
-               <property name="text">
-                <string>4</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="spacerRightGroup_4">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QLabel" name="state_label_4">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>0 min</string>
              </property>
              <property name="class" stdset="0">
               <string>channelTileLabel</string>
@@ -703,72 +426,6 @@
              </property>
             </widget>
            </item>
-           <item>
-            <layout class="QHBoxLayout" name="group_layout_5">
-             <item>
-              <spacer name="spacerLeftGroup_5">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_title_5">
-               <property name="text">
-                <string>Group:</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_number_5">
-               <property name="text">
-                <string>5</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="spacerRightGroup_5">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QLabel" name="state_label_5">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>0 min</string>
-             </property>
-             <property name="class" stdset="0">
-              <string>channelTileLabel</string>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
         </item>
@@ -812,72 +469,6 @@
              </property>
             </widget>
            </item>
-           <item>
-            <layout class="QHBoxLayout" name="group_layout_6">
-             <item>
-              <spacer name="spacerLeftGroup_6">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_title_6">
-               <property name="text">
-                <string>Group:</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_number_6">
-               <property name="text">
-                <string>6</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="spacerRightGroup_6">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QLabel" name="state_label_6">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>0 min</string>
-             </property>
-             <property name="class" stdset="0">
-              <string>channelTileLabel</string>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
         </item>
@@ -915,72 +506,6 @@
              </property>
              <property name="text">
               <string>Channel 7</string>
-             </property>
-             <property name="class" stdset="0">
-              <string>channelTileLabel</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="group_layout_7">
-             <item>
-              <spacer name="spacerLeftGroup_7">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_title_7">
-               <property name="text">
-                <string>Group:</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="group_label_number_7">
-               <property name="text">
-                <string>7</string>
-               </property>
-               <property name="class" stdset="0">
-                <string>channelTileLabel</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="spacerRightGroup_7">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>10</width>
-                 <height>10</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QLabel" name="state_label_7">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>0 min</string>
              </property>
              <property name="class" stdset="0">
               <string>channelTileLabel</string>

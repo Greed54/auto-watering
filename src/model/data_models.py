@@ -36,11 +36,13 @@ class Schedule:
 
 @dataclass
 class ApplicationState:
-    selected_channel_id: int = None
     pump: Channel = field(default_factory=lambda: Channel(0, "Pump", type=ChannelType.PUMP, is_active=True))
     channels: Dict[int, Channel] = field(default_factory=dict)
     groups: Dict[int, Group] = field(default_factory=list)
-    schedule: Optional[Schedule] = None
+    schedule: Schedule = None
+
+    selected_channel_id: int = None
+    is_auto_watering_enabled: bool = False
 
     @staticmethod
     def _default_state():

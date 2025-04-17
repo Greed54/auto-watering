@@ -10,6 +10,7 @@ from model.data_models import ApplicationState
 from view.window_manager import WindowManager
 from view.channel_settings_window import ChannelSettingsWindow
 from view.main_window import MainWindow
+from view.manual_window import ManualModeWindow
 
 
 def main():
@@ -17,10 +18,11 @@ def main():
     app_state = ApplicationState._default_state()
     main_window = MainWindow(app_state)
     channel_settings_window = ChannelSettingsWindow(app_state)
+    manual_mode_window = ManualModeWindow(app_state)
 
-    window = WindowManager(main_window, channel_settings_window)
+    window = WindowManager(main_window, channel_settings_window, manual_mode_window)
 
-    apply_stylesheet(app, theme='light_blue.xml', invert_secondary=True, css_file='view/style.css')
+    apply_stylesheet(app, theme='light_blue.xml', invert_secondary=True, css_file='view/styles/style.css')
 
     window.show()
 
