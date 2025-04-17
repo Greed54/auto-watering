@@ -8,6 +8,7 @@ from model.data_models import ApplicationState
 from ui.MainScreen import Ui_MainWindow
 from view.styles.dynamic_styles import ENABLED_CHANNEL_STYLE, DISABLED_CHANNEL_STYLE, INACTIVE_CHANNEL_STYLE, ENABLED_PUMP_STYLE, \
     DISABLED_PUMP_STYLE, AUTO_WATERING_ENABLED_STYLE, AUTO_WATERING_DISABLED_STYLE
+from view.warning_dialog import WarningDialog
 from viewmodel.main_view_model import MainViewModel
 
 
@@ -16,10 +17,14 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+
+        self.warning_dialog = WarningDialog(self)
+
         self.view_model = MainViewModel(state)
 
         self.view_model.time_updated.connect(self.ui.date_time_label.setText)
         self.view_model.state_updated.connect(self.on_state_updated)
+        self.view_model.warning_shown.connect(self.show_warning)
 
         self.ui.toggle_watering_btn.clicked.connect(self.view_model.toggle_auto_watering)
         self.ui.manual_mode_btn.clicked.connect(self.view_model.on_manual_mode_clicked)
@@ -90,6 +95,10 @@ class MainWindow(QMainWindow):
                         tile_widget.setStyleSheet(DISABLED_CHANNEL_STYLE.format(channel_id=channel.id))
                 else:
                     tile_widget.setStyleSheet(INACTIVE_CHANNEL_STYLE.format(channel_id=channel.id))
+
+    def show_warning(self, text: str):
+        self.warning_dialog.set_text(text)
+        self.warning_dialog.show()
 
     def eventFilter(self, source, event):
         if source in self.channel_tiles.keys() and event.type() == QtCore.QEvent.Type.MouseButtonPress:

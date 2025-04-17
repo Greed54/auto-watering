@@ -10,6 +10,7 @@ class MainViewModel(QObject):
     state_updated = Signal(object)
     channel_clicked = Signal(int)
     manual_mode_clicked = Signal()
+    warning_shown = Signal(str)
 
     def __init__(self, state: ApplicationState, parent=None):
         super().__init__(parent)
@@ -41,4 +42,7 @@ class MainViewModel(QObject):
 
     @Slot()
     def on_manual_mode_clicked(self):
-        self.manual_mode_clicked.emit()
+        if self.state.is_auto_watering_enabled:
+            self.warning_shown.emit("Auto watering is enabled.\nDisable it before.")
+        else:
+            self.manual_mode_clicked.emit()

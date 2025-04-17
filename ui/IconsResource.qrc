@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icons">
+    <file>icons8-warning-48.png</file>
     <file>icons8-auto-48.png</file>
     <file>pause_icon.svg</file>
     <file>play_icon.svg</file>
