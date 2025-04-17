@@ -1,9 +1,9 @@
 <RCC>
   <qresource prefix="icons">
+    <file>pause_icon.svg</file>
+    <file>play_icon.svg</file>
     <file>icons8-wifi-off-48.png</file>
     <file>icons8-wi-fi-on-48.png</file>
-    <file>icons8-stop-48.png</file>
-    <file>icons8-start-48.png</file>
     <file>icons8-manual-48.png</file>
     <file>icons8-time-48.png</file>
     <file>icons8-settings-48.png</file>

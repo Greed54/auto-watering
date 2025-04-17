@@ -20,7 +20,7 @@ def main():
 
     window = WindowManager(main_window, channel_settings_window)
 
-    apply_stylesheet(app, theme='light_blue.xml', css_file='view/style.css')
+    apply_stylesheet(app, theme='light_blue.xml', invert_secondary=True, css_file='view/style.css')
 
     window.show()
 

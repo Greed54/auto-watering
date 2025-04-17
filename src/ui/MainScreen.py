@@ -50,14 +50,17 @@ class Ui_MainWindow(object):
         self.topLeftLayout.setObjectName(u"topLeftLayout")
         self.date_time_label = QLabel(self.centralwidget)
         self.date_time_label.setObjectName(u"date_time_label")
-        self.date_time_label.setMinimumSize(QSize(250, 0))
+        self.date_time_label.setMinimumSize(QSize(250, 50))
         self.date_time_label.setStyleSheet(u"font-size: 30pt;")
+        self.date_time_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.topLeftLayout.addWidget(self.date_time_label)
 
         self.wifi_status_icon = QLabel(self.centralwidget)
         self.wifi_status_icon.setObjectName(u"wifi_status_icon")
+        self.wifi_status_icon.setMinimumSize(QSize(0, 50))
         self.wifi_status_icon.setPixmap(QPixmap(u":/icons/icons8-wifi-off-48.png"))
+        self.wifi_status_icon.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.topLeftLayout.addWidget(self.wifi_status_icon)
 
@@ -71,22 +74,8 @@ class Ui_MainWindow(object):
         self.toggle_watering_btn = QPushButton(self.centralwidget)
         self.toggle_watering_btn.setObjectName(u"toggle_watering_btn")
         self.toggle_watering_btn.setMinimumSize(QSize(170, 50))
-        self.toggle_watering_btn.setStyleSheet(u"QPushButton {\n"
-"                            background-color: #1e88e5;\n"
-"                            color: white;\n"
-"                            border: none;\n"
-"                            border-radius: 20px;\n"
-"                            font-size: 30pt;\n"
-"                            }\n"
-"                            QPushButton:hover {\n"
-"                            background-color: #1976d2;\n"
-"                            }\n"
-"                            QPushButton:pressed {\n"
-"                            background-color: #0d47a1;\n"
-"                            }\n"
-"                          ")
         icon = QIcon()
-        icon.addFile(u":/icons/icons8-start-48.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon.addFile(u":/icons/play_icon.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.toggle_watering_btn.setIcon(icon)
         self.toggle_watering_btn.setIconSize(QSize(48, 48))
         self.toggle_watering_btn.setAutoDefault(False)
@@ -97,20 +86,6 @@ class Ui_MainWindow(object):
         self.manual_mode_btn = QPushButton(self.centralwidget)
         self.manual_mode_btn.setObjectName(u"manual_mode_btn")
         self.manual_mode_btn.setMinimumSize(QSize(50, 50))
-        self.manual_mode_btn.setStyleSheet(u"QPushButton {\n"
-"                            background-color: #f0f0f0;\n"
-"                            color: #333333;\n"
-"                            border: none;\n"
-"                            border-radius: 20px;\n"
-"                            padding: 8px 24px;\n"
-"                            }\n"
-"                            QPushButton:hover {\n"
-"                            background-color: #e0e0e0;\n"
-"                            }\n"
-"                            QPushButton:pressed {\n"
-"                            background-color: #cccccc;\n"
-"                            }\n"
-"                          ")
         icon1 = QIcon()
         icon1.addFile(u":/icons/icons8-manual-48.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.manual_mode_btn.setIcon(icon1)
@@ -121,20 +96,6 @@ class Ui_MainWindow(object):
         self.schedule_btn = QPushButton(self.centralwidget)
         self.schedule_btn.setObjectName(u"schedule_btn")
         self.schedule_btn.setMinimumSize(QSize(50, 50))
-        self.schedule_btn.setStyleSheet(u"QPushButton {\n"
-"                            background-color: #f0f0f0;\n"
-"                            color: #333333;\n"
-"                            border: none;\n"
-"                            border-radius: 20px;\n"
-"                            padding: 8px 24px;\n"
-"                            }\n"
-"                            QPushButton:hover {\n"
-"                            background-color: #e0e0e0;\n"
-"                            }\n"
-"                            QPushButton:pressed {\n"
-"                            background-color: #cccccc;\n"
-"                            }\n"
-"                          ")
         icon2 = QIcon()
         icon2.addFile(u":/icons/icons8-time-48.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.schedule_btn.setIcon(icon2)
@@ -145,20 +106,6 @@ class Ui_MainWindow(object):
         self.settings_btn = QPushButton(self.centralwidget)
         self.settings_btn.setObjectName(u"settings_btn")
         self.settings_btn.setMinimumSize(QSize(50, 50))
-        self.settings_btn.setStyleSheet(u"QPushButton {\n"
-"                            background-color: #f0f0f0;\n"
-"                            color: #333333;\n"
-"                            border: none;\n"
-"                            border-radius: 20px;\n"
-"                            padding: 8px 24px;\n"
-"                            }\n"
-"                            QPushButton:hover {\n"
-"                            background-color: #e0e0e0;\n"
-"                            }\n"
-"                            QPushButton:pressed {\n"
-"                            background-color: #cccccc;\n"
-"                            }\n"
-"                          ")
         icon3 = QIcon()
         icon3.addFile(u":/icons/icons8-settings-48.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.settings_btn.setIcon(icon3)
@@ -546,9 +493,13 @@ class Ui_MainWindow(object):
         self.date_time_label.setText(QCoreApplication.translate("MainWindow", u"12:30 | 12.04.2025", None))
         self.wifi_status_icon.setText("")
         self.toggle_watering_btn.setText(QCoreApplication.translate("MainWindow", u"Start", None))
+        self.toggle_watering_btn.setProperty(u"class", QCoreApplication.translate("MainWindow", u"startStopButton", None))
         self.manual_mode_btn.setText("")
+        self.manual_mode_btn.setProperty(u"class", QCoreApplication.translate("MainWindow", u"topBarButton", None))
         self.schedule_btn.setText("")
+        self.schedule_btn.setProperty(u"class", QCoreApplication.translate("MainWindow", u"topBarButton", None))
         self.settings_btn.setText("")
+        self.settings_btn.setProperty(u"class", QCoreApplication.translate("MainWindow", u"topBarButton", None))
         self.name_label_1.setText(QCoreApplication.translate("MainWindow", u"Channel 1", None))
         self.name_label_1.setProperty(u"class", QCoreApplication.translate("MainWindow", u"channelTileLabel", None))
         self.group_label_title_1.setText(QCoreApplication.translate("MainWindow", u"Group:", None))
