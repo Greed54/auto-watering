@@ -1,4 +1,6 @@
+# Name of the virtual environment
 VENV := .venv
+
 PYUIC := $(VENV)/bin/pyside6-uic
 PYRCC := $(VENV)/bin/pyside6-rcc
 

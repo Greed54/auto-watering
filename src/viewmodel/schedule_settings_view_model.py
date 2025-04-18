@@ -14,6 +14,7 @@ class ScheduleSettingsViewModel(QObject):
     interval_changed = Signal(object)  # QTime | None
     groups_loaded = Signal(object)
     warning_requested = Signal(str)
+    save_enabled = Signal(bool)
 
     def __init__(self, state: ApplicationState, parent=None):
         super().__init__(parent)
@@ -26,6 +27,13 @@ class ScheduleSettingsViewModel(QObject):
         if self._state.schedule.is_auto_watering_enabled:
             self.warning_requested.emit(
                 "You cannot change the schedule settings while the automatic mode is active. Disable it before doing so.")
+            self.save_enabled.emit(False)
+        else:
+            self.save_enabled.emit(True)
+        self._from_state_to_local()
+
+    @Slot()
+    def close(self):
         self._from_state_to_local()
 
     @Slot(bool)
@@ -64,7 +72,7 @@ class ScheduleSettingsViewModel(QObject):
     @Slot()
     def save(self):
         schedule = self._state.schedule
-        schedule.sunsetMode = self._local_schedule["sunsetMode"]
+        schedule.sunset_mode = self._local_schedule["sunsetMode"]
         schedule.start_time = self._local_schedule["start_time"]
         schedule.end_time = self._local_schedule["end_time"]
         schedule.cycle_interval = self._local_schedule["interval"]
@@ -76,7 +84,7 @@ class ScheduleSettingsViewModel(QObject):
     def _from_state_to_local(self):
         schedule = self._state.schedule
         self._local_schedule = {
-            "sunsetMode": schedule.sunsetMode,
+            "sunsetMode": schedule.sunset_mode,
             "start_time": schedule.start_time,
             "end_time": schedule.end_time,
             "interval": schedule.cycle_interval,

@@ -29,6 +29,7 @@ class ScheduleSettingsWindow(QMainWindow):
         self._view_model.interval_changed.connect(self._apply_time(self._ui.watering_interval_time_edit))
         self._view_model.groups_loaded.connect(self._populate_groups_table)
         self._view_model.warning_requested.connect(self._show_warning)
+        self._view_model.save_enabled.connect(self._on_save_enabled)
 
         # View → VM
         self._ui.sunrise_mode_check_box.toggled.connect(self._on_sunset_toggled)
@@ -56,7 +57,7 @@ class ScheduleSettingsWindow(QMainWindow):
         tbl = self._ui.group_duration_table
         tbl.clearContents()
         tbl.setRowCount(len(group_durations))
-        for row, (gid, dur) in enumerate(group_durations.items()):
+        for row, (gid, dur) in enumerate(sorted(group_durations.items(), key=lambda x: x[0])):
             # колонка 0: ID группы
             item = QTableWidgetItem(str(gid))
             item.setFlags(item.flags()
@@ -71,7 +72,7 @@ class ScheduleSettingsWindow(QMainWindow):
             te.setTime(QTime(dur.hour, dur.minute, dur.second))
             te.setFocusPolicy(Qt.FocusPolicy.ClickFocus)
             te.setStyleSheet('font-size: 20pt;')
-            te.timeChanged.connect(lambda qt: self._view_model.set_group_duration(gid, qt))
+            te.timeChanged.connect(lambda qt, group_id=gid: self._view_model.set_group_duration(group_id, qt))
             te.installEventFilter(self)
             tbl.setCellWidget(row, 1, te)
 
@@ -94,8 +95,13 @@ class ScheduleSettingsWindow(QMainWindow):
     def _on_sunset_toggled(self, checked: bool):
         self._view_model.set_sunset_mode(checked)
 
+    def _on_save_enabled(self, is_enabled: bool):
+        if is_enabled:
+            self._ui.save_settings_btn.setEnabled(True)
+        else:
+            self._ui.save_settings_btn.setDisabled(True)
+
     def _show_warning(self, text: str):
-        self._ui.save_settings_btn.setDisabled(True)
         self._warning_dialog.set_text(text)
         self._warning_dialog.show()
 
@@ -104,7 +110,7 @@ class ScheduleSettingsWindow(QMainWindow):
         self.schedule_closed.emit()
 
     def _on_cancel(self):
-        self._view_model.load()
+        self._view_model.close()
         self.schedule_closed.emit()
 
     def eventFilter(self, watched: QObject, event: QEvent):

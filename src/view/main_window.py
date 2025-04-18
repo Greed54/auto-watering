@@ -18,6 +18,7 @@ from view.styles.dynamic_styles import (
 )
 from view.warning_dialog import WarningDialog
 from viewmodel.main_view_model import MainViewModel
+from viewmodel.qt_scheduler_adapter import QtSchedulerAdapter
 
 
 class MainWindow(QMainWindow):
@@ -25,12 +26,12 @@ class MainWindow(QMainWindow):
     schedule_settings_requested = Signal()
     manual_mode_requested = Signal()
 
-    def __init__(self, state: ApplicationState):
+    def __init__(self, state: ApplicationState, auto_watering_scheduler: QtSchedulerAdapter):
         super().__init__()
         self._ui = Ui_MainWindow()
         self._ui.setupUi(self)
 
-        self._view_model = MainViewModel(state)
+        self._view_model = MainViewModel(state, auto_watering_scheduler)
         self._warning_dialog = WarningDialog(self)
 
         self._view_model.time_updated.connect(self._ui.date_time_label.setText)
@@ -99,8 +100,8 @@ class MainWindow(QMainWindow):
             name_label.setText(channel.name)
             group_label.setText(str(channel.group_id))
             state_label.setText(
-                channel.last_activation.time().strftime("%H:%M")
-                if channel.last_activation
+                channel.next_watering_time.time().strftime("%H:%M")
+                if channel.next_watering_time
                 else "N/A"
             )
 

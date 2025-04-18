@@ -3,6 +3,7 @@ from datetime import datetime
 from PySide6.QtCore import QObject, QTimer, Signal, Slot, SignalInstance
 
 from model.data_models import ApplicationState
+from viewmodel.qt_scheduler_adapter import QtSchedulerAdapter
 
 
 class MainViewModel(QObject):
@@ -10,14 +11,24 @@ class MainViewModel(QObject):
     state_updated = Signal(ApplicationState)
     warning_requested = Signal(str)
 
-    def __init__(self, state: ApplicationState, parent=None):
+    def __init__(self, state: ApplicationState, auto_watering_scheduler: QtSchedulerAdapter, parent=None):
         super().__init__(parent)
         self.state = state
+        self._auto_watering_scheduler = auto_watering_scheduler
+        self._auto_watering_scheduler.state_changed.connect(self.on_scheduler_state_changed)
+        self._auto_watering_scheduler.start()
 
         self._timer = QTimer(self)
         self._timer.timeout.connect(self.refresh_time)
         self._timer.start(1000)
         self.refresh_time()
+
+    @Slot(ApplicationState)
+    def on_scheduler_state_changed(self, new_state: ApplicationState):
+        channels_next_run_times = self._auto_watering_scheduler.get_next_run_times()
+        for channel in new_state.channels.values():
+            channel.next_watering_time = channels_next_run_times[channel.id]
+        self.state_updated.emit(new_state)
 
     @Slot()
     def refresh_time(self):
@@ -34,6 +45,12 @@ class MainViewModel(QObject):
     def toggle_auto_watering(self):
         # todo: add validation
         self.state.schedule.is_auto_watering_enabled = not self.state.schedule.is_auto_watering_enabled
+
+        if self.state.schedule.is_auto_watering_enabled:
+            self._auto_watering_scheduler.resume()
+        else:
+            self._auto_watering_scheduler.pause()
+
         self.state_updated.emit(self.state)
 
     @Slot(SignalInstance)

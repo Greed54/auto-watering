@@ -13,7 +13,7 @@ class ChannelType(Enum):
 class Channel:
     id: int
     name: str
-    last_activation: Optional[datetime] = None
+    next_watering_time: Optional[datetime] = None
     type: ChannelType = ChannelType.VALVE
     group_id: Optional[int] = None
     is_active: bool = False
@@ -28,11 +28,21 @@ class Group:
 
 @dataclass
 class Schedule:
-    sunsetMode: bool = True
+    sunset_mode: bool = True
     start_time: Optional[time] = None
     end_time: Optional[time] = None
     cycle_interval: time = field(default_factory=lambda: time(hour=1, minute=0))
     is_auto_watering_enabled: bool = False
+
+
+@dataclass
+class SchedulerState:
+    in_progress: bool = False  # whether a watering cycle is running
+    last_cycle_start: Optional[datetime] = None
+    current_group_id: Optional[int] = None
+    group_remaining_sec: int = 0  # seconds left in the current group
+    next_cycle_time: Optional[datetime] = None
+    paused: bool = False  # are we currently paused?
 
 
 @dataclass
@@ -43,27 +53,11 @@ class ApplicationState:
     schedule: Schedule = field(default_factory=Schedule)
 
     selected_channel_id: int = None
+    scheduler_state: SchedulerState = field(default_factory=SchedulerState)
 
     @staticmethod
     def default_state():
-        channels = {
-            1: Channel(1, "Channel 1", group_id=1),
-            2: Channel(2, "Channel 2", group_id=1),
-            3: Channel(3, "Channel 3", group_id=1),
-            4: Channel(4, "Channel 4", group_id=1),
-            5: Channel(5, "Channel 5", group_id=1),
-            6: Channel(6, "Channel 6", group_id=1),
-            7: Channel(7, "Channel 7", group_id=1),
-        }
-
-        groups = {
-            1: Group(1),
-            2: Group(2),
-            3: Group(3),
-            4: Group(4),
-            5: Group(5),
-            6: Group(6),
-            7: Group(7),
-        }
+        channels = {i: Channel(i, f"Channel {i}", group_id=1) for i in range(1, 8)}
+        groups = {i: Group(i) for i in range(1, 8)}
 
         return ApplicationState(channels=channels, groups=groups)
