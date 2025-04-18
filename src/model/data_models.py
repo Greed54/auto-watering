@@ -23,15 +23,16 @@ class Channel:
 @dataclass
 class Group:
     id: int
-    water_duration_seconds: int = None
+    watering_duration: time = field(default_factory=lambda: time(minute=1))
 
 
 @dataclass
 class Schedule:
-    start_time: time
-    end_time: time
-    cycle_interval_seconds: int
-    active: bool = True
+    sunsetMode: bool = True
+    start_time: Optional[time] = None
+    end_time: Optional[time] = None
+    cycle_interval: time = field(default_factory=lambda: time(hour=1, minute=0))
+    is_auto_watering_enabled: bool = False
 
 
 @dataclass
@@ -39,13 +40,12 @@ class ApplicationState:
     pump: Channel = field(default_factory=lambda: Channel(0, "Pump", type=ChannelType.PUMP, is_active=True))
     channels: Dict[int, Channel] = field(default_factory=dict)
     groups: Dict[int, Group] = field(default_factory=list)
-    schedule: Schedule = None
+    schedule: Schedule = field(default_factory=Schedule)
 
     selected_channel_id: int = None
-    is_auto_watering_enabled: bool = False
 
     @staticmethod
-    def _default_state():
+    def default_state():
         channels = {
             1: Channel(1, "Channel 1", group_id=1),
             2: Channel(2, "Channel 2", group_id=1),
@@ -57,7 +57,13 @@ class ApplicationState:
         }
 
         groups = {
-            1: Group(1)
+            1: Group(1),
+            2: Group(2),
+            3: Group(3),
+            4: Group(4),
+            5: Group(5),
+            6: Group(6),
+            7: Group(7),
         }
 
         return ApplicationState(channels=channels, groups=groups)

@@ -8,7 +8,6 @@ from model.data_models import ApplicationState
 class ManualModeViewModel(QObject):
     time_updated = Signal(str)
     state_updated = Signal(ApplicationState)
-    auto_mode_requested = Signal()
 
     def __init__(self, state: ApplicationState, parent=None):
         super().__init__(parent)
@@ -25,12 +24,11 @@ class ManualModeViewModel(QObject):
         self.time_updated.emit(current_time)
 
     @Slot()
-    def enable_auto__mode(self):
+    def enable_auto_mode(self):
         self.state.pump.is_enabled = False
         for channel in self.state.channels.values():
             channel.is_enabled = False
         self.state_updated.emit(self.state)
-        self.auto_mode_requested.emit()
 
     @Slot()
     def toggle_channel(self, channel_id: int):

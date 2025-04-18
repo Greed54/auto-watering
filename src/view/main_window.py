@@ -1,6 +1,7 @@
 from typing import Dict
 
 from PySide6 import QtCore
+from PySide6.QtCore import Signal
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QWidget, QMainWindow
 
@@ -20,42 +21,57 @@ from viewmodel.main_view_model import MainViewModel
 
 
 class MainWindow(QMainWindow):
+    channel_selected = Signal()
+    schedule_settings_requested = Signal()
+    manual_mode_requested = Signal()
+
     def __init__(self, state: ApplicationState):
         super().__init__()
         self._ui = Ui_MainWindow()
         self._ui.setupUi(self)
 
-        self.view_model = MainViewModel(state)
+        self._view_model = MainViewModel(state)
         self._warning_dialog = WarningDialog(self)
 
-        self.view_model.time_updated.connect(self._ui.date_time_label.setText)
-        self.view_model.state_updated.connect(self._on_state_updated)
-        self.view_model.warning_requested.connect(self._show_warning)
+        self._view_model.time_updated.connect(self._ui.date_time_label.setText)
+        self._view_model.state_updated.connect(self._on_state_updated)
+        self._view_model.warning_requested.connect(self._show_warning)
 
-        self._ui.toggle_watering_btn.clicked.connect(self.view_model.toggle_auto_watering)
-        self._ui.manual_mode_btn.clicked.connect(self.view_model.on_manual_mode_clicked)
+        self._ui.toggle_watering_btn.clicked.connect(self._view_model.toggle_auto_watering)
+        self._ui.manual_mode_btn.clicked.connect(self._on_manual_mode_clicked)
+        self._ui.schedule_btn.clicked.connect(self._on_schedule_settings_clicked)
 
         self._channel_tiles: Dict[QWidget, int] = {}
-        for cid, channel in self.view_model.state.channels.items():
+        for cid, channel in self._view_model.state.channels.items():
             tile = getattr(self._ui, f"channel_tile_{cid}", None)
             if tile:
                 tile.installEventFilter(self)
                 self._channel_tiles[tile] = cid
 
     def showEvent(self, event):
-        self.view_model.refresh_time()
-        self._on_state_updated(self.view_model.state)
+        self._view_model.refresh_time()
+        self._on_state_updated(self._view_model.state)
         super().showEvent(event)
 
     def eventFilter(self, source, event):
         if event.type() == QtCore.QEvent.Type.MouseButtonPress and source in self._channel_tiles:
             cid = self._channel_tiles[source]
-            self.view_model.select_channel(cid)
+            self._on_channel_selected(cid)
             return True
         return super().eventFilter(source, event)
 
+    def _on_channel_selected(self, channel_id: int):
+        self._view_model.select_channel(channel_id)
+        self.channel_selected.emit()
+
+    def _on_manual_mode_clicked(self):
+        self._view_model.toggle_manual_mode(self.manual_mode_requested)
+
+    def _on_schedule_settings_clicked(self):
+        self.schedule_settings_requested.emit()
+
     def _on_state_updated(self, state: ApplicationState):
-        self._update_auto_watering_button(state.is_auto_watering_enabled)
+        self._update_auto_watering_button(state.schedule.is_auto_watering_enabled)
         self._update_pump_tile(state.pump.is_enabled)
         self._update_channels(state)
 

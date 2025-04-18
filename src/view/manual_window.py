@@ -1,6 +1,7 @@
 from typing import Dict
 
 from PySide6 import QtCore
+from PySide6.QtCore import Signal
 from PySide6.QtWidgets import QMainWindow, QWidget
 
 from model.data_models import ApplicationState
@@ -15,17 +16,19 @@ from viewmodel.manual_mode_view_model import ManualModeViewModel
 
 
 class ManualModeWindow(QMainWindow):
+    auto_mode_requested = Signal()
+
     def __init__(self, state: ApplicationState):
         super().__init__()
         self._ui = Ui_ManualWindow()
         self._ui.setupUi(self)
 
-        self.view_model = ManualModeViewModel(state)
+        self._view_model = ManualModeViewModel(state)
 
-        self.view_model.time_updated.connect(self._ui.date_time_label.setText)
-        self.view_model.state_updated.connect(self._on_state_updated)
+        self._view_model.time_updated.connect(self._ui.date_time_label.setText)
+        self._view_model.state_updated.connect(self._on_state_updated)
 
-        self._ui.auto_mode_btn.clicked.connect(self.view_model.enable_auto__mode)
+        self._ui.auto_mode_btn.clicked.connect(self._on_auto_mode_clicked)
 
         self._channel_tiles: Dict[QWidget, int] = {}
         for cid in state.channels:
@@ -38,8 +41,8 @@ class ManualModeWindow(QMainWindow):
         self._pump_tile.installEventFilter(self)
 
     def showEvent(self, event):
-        self.view_model.refresh_time()
-        self._on_state_updated(self.view_model.state)
+        self._view_model.refresh_time()
+        self._on_state_updated(self._view_model.state)
         super().showEvent(event)
 
     def _on_state_updated(self, state: ApplicationState):
@@ -60,15 +63,19 @@ class ManualModeWindow(QMainWindow):
                 style = ENABLED_CHANNEL_STYLE if channel.is_enabled else DISABLED_CHANNEL_STYLE
                 tile.setStyleSheet(style.format(channel_id=cid))
 
+    def _on_auto_mode_clicked(self):
+        self._view_model.enable_auto_mode()
+        self.auto_mode_requested.emit()
+
     def eventFilter(self, source, event):
         if event.type() == QtCore.QEvent.Type.MouseButtonPress:
             if source in self._channel_tiles:
                 cid = self._channel_tiles[source]
-                self.view_model.toggle_channel(cid)
+                self._view_model.toggle_channel(cid)
                 return True
 
             if source is self._pump_tile:
-                self.view_model.toggle_pump()
+                self._view_model.toggle_pump()
                 return True
 
         return super().eventFilter(source, event)

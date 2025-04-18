@@ -5,7 +5,6 @@ from model.data_models import ApplicationState, Group
 
 class ChannelSettingsViewModel(QObject):
     state_changed = Signal(ApplicationState)
-    settings_saved = Signal()
 
     def __init__(self, state: ApplicationState, parent=None):
         super().__init__(parent)
@@ -28,4 +27,3 @@ class ChannelSettingsViewModel(QObject):
             self.state.groups[group_id] = Group(id=group_id)
 
         self.state_changed.emit(self.state)
-        self.settings_saved.emit()

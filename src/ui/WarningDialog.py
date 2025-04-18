@@ -24,14 +24,14 @@ class Ui_WarningDialog(object):
     def setupUi(self, WarningDialog):
         if not WarningDialog.objectName():
             WarningDialog.setObjectName(u"WarningDialog")
-        WarningDialog.resize(400, 250)
+        WarningDialog.resize(500, 400)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(WarningDialog.sizePolicy().hasHeightForWidth())
         WarningDialog.setSizePolicy(sizePolicy)
-        WarningDialog.setMinimumSize(QSize(400, 250))
-        WarningDialog.setMaximumSize(QSize(400, 250))
+        WarningDialog.setMinimumSize(QSize(500, 400))
+        WarningDialog.setMaximumSize(QSize(500, 400))
         WarningDialog.setStyleSheet(u"background-color: white;\n"
 "border-radius: 10px;")
         self.verticalLayout = QVBoxLayout(WarningDialog)
@@ -63,12 +63,13 @@ class Ui_WarningDialog(object):
 
         self.warning_text_label = QLabel(WarningDialog)
         self.warning_text_label.setObjectName(u"warning_text_label")
-        self.warning_text_label.setMinimumSize(QSize(0, 110))
+        self.warning_text_label.setMinimumSize(QSize(0, 250))
         font1 = QFont()
-        font1.setPointSize(30)
+        font1.setPointSize(25)
         self.warning_text_label.setFont(font1)
-        self.warning_text_label.setStyleSheet(u"font-size: 30pt;")
+        self.warning_text_label.setStyleSheet(u"font-size: 25pt;")
         self.warning_text_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.warning_text_label.setWordWrap(True)
 
         self.verticalLayout.addWidget(self.warning_text_label)
 

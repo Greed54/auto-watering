@@ -19,7 +19,7 @@ class WarningDialog(QWidget):
         layout.addStretch()
 
         self.container = QtWidgets.QFrame(self)
-        self.container.setFixedSize(400, 250)
+        self.container.setFixedSize(500, 400)
         self.container.setStyleSheet("background-color: white; border-radius: 10px;")
 
         layout.addWidget(self.container, alignment=QtCore.Qt.AlignmentFlag.AlignCenter)
