@@ -29,7 +29,7 @@ INACTIVE_CHANNEL_STYLE = '''
 '''
 
 # language=css
-ENABLED_PUMP_STYLE = '''
+ENABLED_PUMP_TILE_STYLE = '''
 #pump_channel_tile {
     border: 2px solid rgb(235, 239, 239);
     border-radius: 10px;
@@ -39,7 +39,7 @@ ENABLED_PUMP_STYLE = '''
 '''
 
 # language=css
-DISABLED_PUMP_STYLE = '''
+DISABLED_PUMP_TILE_STYLE = '''
 #pump_channel_tile {
     border: 2px solid rgb(235, 239, 239);
     border-radius: 10px;
@@ -49,7 +49,7 @@ DISABLED_PUMP_STYLE = '''
 '''
 
 # language=css
-AUTO_WATERING_ENABLED_STYLE = '''
+AUTO_WATERING_ENABLED_BUTTON_STYLE = '''
 .startStopButton {
     background-color: #E83F25;
     color: white;
@@ -64,7 +64,7 @@ AUTO_WATERING_ENABLED_STYLE = '''
 '''
 
 # language=css
-AUTO_WATERING_DISABLED_STYLE = '''
+AUTO_WATERING_DISABLED_BUTTON_STYLE = '''
 .startStopButton {
     background-color: #1e88e5;
     color: white;

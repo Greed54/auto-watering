@@ -15,26 +15,26 @@ class WindowManager(QtWidgets.QStackedWidget):
         self.setFixedSize(800, 480)
         self.setSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
 
-        main_window.view_model.channel_clicked.connect(self.show_channel_settings)
-        main_window.view_model.manual_mode_clicked.connect(self.show_manual_mode_window)
+        main_window.view_model.channel_selected.connect(self._show_channel_settings)
+        main_window.view_model.manual_mode_requested.connect(self._show_manual_mode_window)
 
-        channel_settings_window.view_model.settings_saved.connect(self.show_main_window)
+        channel_settings_window.view_model.settings_saved.connect(self._show_main_window)
 
-        manual_mode_window.view_model.auto_mode_clicked.connect(self.show_main_window)
+        manual_mode_window.view_model.auto_mode_requested.connect(self._show_main_window)
 
         self.addWidget(main_window)
         self.addWidget(channel_settings_window)
         self.addWidget(manual_mode_window)
 
     def showEvent(self, event, /):
-        self.show_main_window()
+        self._show_main_window()
         super().showEvent(event)
 
-    def show_main_window(self):
+    def _show_main_window(self):
         self.setCurrentIndex(0)
 
-    def show_channel_settings(self):
+    def _show_channel_settings(self):
         self.setCurrentIndex(1)
 
-    def show_manual_mode_window(self):
+    def _show_manual_mode_window(self):
         self.setCurrentIndex(2)

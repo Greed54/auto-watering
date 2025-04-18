@@ -1,76 +1,74 @@
-from typing import cast
+from typing import Dict
 
 from PySide6 import QtCore
-from PySide6.QtWidgets import QMainWindow, QWidget, QLabel
+from PySide6.QtWidgets import QMainWindow, QWidget
 
 from model.data_models import ApplicationState
 from ui.ManualScreen import Ui_ManualWindow
-from view.styles.dynamic_styles import ENABLED_PUMP_STYLE, DISABLED_PUMP_STYLE, ENABLED_CHANNEL_STYLE, DISABLED_CHANNEL_STYLE
+from view.styles.dynamic_styles import (
+    ENABLED_PUMP_TILE_STYLE,
+    DISABLED_PUMP_TILE_STYLE,
+    ENABLED_CHANNEL_STYLE,
+    DISABLED_CHANNEL_STYLE,
+)
 from viewmodel.manual_mode_view_model import ManualModeViewModel
 
 
 class ManualModeWindow(QMainWindow):
     def __init__(self, state: ApplicationState):
         super().__init__()
-        self.ui = Ui_ManualWindow()
-        self.ui.setupUi(self)
+        self._ui = Ui_ManualWindow()
+        self._ui.setupUi(self)
 
         self.view_model = ManualModeViewModel(state)
 
-        self.view_model.time_updated.connect(self.ui.date_time_label.setText)
-        self.view_model.state_updated.connect(self.on_state_updated)
+        self.view_model.time_updated.connect(self._ui.date_time_label.setText)
+        self.view_model.state_updated.connect(self._on_state_updated)
 
-        self.ui.auto_mode_btn.clicked.connect(self.view_model.on_auto_mode_clicked)
+        self._ui.auto_mode_btn.clicked.connect(self.view_model.enable_auto__mode)
 
-        self.channel_tiles = {
-            self.ui.channel_tile_1: 1,
-            self.ui.channel_tile_2: 2,
-            self.ui.channel_tile_3: 3,
-            self.ui.channel_tile_4: 4,
-            self.ui.channel_tile_5: 5,
-            self.ui.channel_tile_6: 6,
-            self.ui.channel_tile_7: 7
-        }
-        for channel_tile in self.channel_tiles.keys():
-            channel_tile.installEventFilter(self)
+        self._channel_tiles: Dict[QWidget, int] = {}
+        for cid in state.channels:
+            tile = getattr(self._ui, f"channel_tile_{cid}", None)
+            if tile is not None:
+                tile.installEventFilter(self)
+                self._channel_tiles[tile] = cid
 
-        self.ui.pump_channel_tile.installEventFilter(self)
+        self._pump_tile = self._ui.pump_channel_tile
+        self._pump_tile.installEventFilter(self)
 
     def showEvent(self, event):
-        self.view_model.update_time()
-        self.on_state_updated(self.view_model.state)
+        self.view_model.refresh_time()
+        self._on_state_updated(self.view_model.state)
         super().showEvent(event)
 
-    def on_state_updated(self, state: ApplicationState):
-        # update pump ui
-        if state.pump.is_enabled:
-            self.ui.pump_channel_tile.setStyleSheet(ENABLED_PUMP_STYLE)
-        else:
-            self.ui.pump_channel_tile.setStyleSheet(DISABLED_PUMP_STYLE)
+    def _on_state_updated(self, state: ApplicationState):
+        self._update_pump(state.pump.is_enabled)
+        self._update_channels(state)
 
-        # update channel tiles ui
-        for channel in state.channels.values():
-            tile_name = f"channel_tile_{channel.id}"
-            name_label_name = f"name_label_{channel.id}"
+    def _update_pump(self, enabled: bool):
+        style = ENABLED_PUMP_TILE_STYLE if enabled else DISABLED_PUMP_TILE_STYLE
+        self._ui.pump_channel_tile.setStyleSheet(style)
 
-            tile_widget = cast(QWidget, getattr(self.ui, tile_name, None))
-            name_label = cast(QLabel, getattr(self.ui, name_label_name, None))
-
-            if name_label is not None:
+    def _update_channels(self, state: ApplicationState):
+        for cid, channel in state.channels.items():
+            tile = getattr(self._ui, f"channel_tile_{cid}", None)
+            name_label = getattr(self._ui, f"name_label_{cid}", None)
+            if name_label:
                 name_label.setText(channel.name)
-
-            if tile_widget is not None:
-                if channel.is_enabled:
-                    tile_widget.setStyleSheet(ENABLED_CHANNEL_STYLE.format(channel_id=channel.id))
-                else:
-                    tile_widget.setStyleSheet(DISABLED_CHANNEL_STYLE.format(channel_id=channel.id))
+            if tile:
+                style = ENABLED_CHANNEL_STYLE if channel.is_enabled else DISABLED_CHANNEL_STYLE
+                tile.setStyleSheet(style.format(channel_id=cid))
 
     def eventFilter(self, source, event):
-        if source in self.channel_tiles.keys() and event.type() == QtCore.QEvent.Type.MouseButtonPress:
-            self.view_model.on_channel_tale_click(self.channel_tiles[source])
-            return True
-        if source == self.ui.pump_channel_tile and event.type() == QtCore.QEvent.Type.MouseButtonPress:
-            self.view_model.on_pump_tale_click()
-            return True
+        if event.type() == QtCore.QEvent.Type.MouseButtonPress:
+            if source in self._channel_tiles:
+                cid = self._channel_tiles[source]
+                self.view_model.toggle_channel(cid)
+                return True
+
+            if source is self._pump_tile:
+                self.view_model.toggle_pump()
+                return True
 
         return super().eventFilter(source, event)
